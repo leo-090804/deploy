@@ -4,4 +4,4 @@ metadata:
   name: docker-config
   namespace: default
 data:
-  DOCKERHUB_USERNAME: "datfan06" 
+  DOCKERHUB_USERNAME: "itsleo" 
