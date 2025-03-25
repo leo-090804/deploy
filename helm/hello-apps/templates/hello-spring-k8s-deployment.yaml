@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.helloSpringK8s.name }}
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.helloSpringK8s.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.helloSpringK8s.name }}
+    spec:
+      containers:
+      - name: {{ .Values.helloSpringK8s.name }}
+        image: {{ .Values.helloSpringK8s.image.repository }}:{{ .Values.helloSpringK8s.image.tag }}
+        imagePullPolicy: {{ .Values.helloSpringK8s.image.pullPolicy }}
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: docker-config
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          {{- toYaml .Values.helloSpringK8s.resources | nindent 12 }} 

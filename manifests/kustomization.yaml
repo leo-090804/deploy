@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- configmap.yaml
+- hello-spring-k8s/deployment.yaml
+- hello-spring-k8s/service.yaml
+- hello-caller/deployment.yaml
+- hello-caller/service.yaml
+
+images:
+- name: ${DOCKERHUB_USERNAME}/hello-spring-k8s
+  newName: ${DOCKERHUB_USERNAME}/hello-spring-k8s
+  newTag: latest
+- name: ${DOCKERHUB_USERNAME}/hello-caller
+  newName: ${DOCKERHUB_USERNAME}/hello-caller
+  newTag: latest 
