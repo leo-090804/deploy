@@ -1,9 +1,9 @@
-dockerHubUsername: datfan06
+dockerHubUsername: itsleo
 
 helloSpringK8s:
   name: hello-spring-k8s
   image:
-    repository: datfan06/hello-spring-k8s
+    repository: itsleo/hello-spring-k8s
     tag: latest
     pullPolicy: Always
   resources:
@@ -17,7 +17,7 @@ helloSpringK8s:
 helloCaller:
   name: hello-caller
   image:
-    repository: datfan06/hello-caller
+    repository: itsleo/hello-caller
     tag: latest
     pullPolicy: Always
   resources:
